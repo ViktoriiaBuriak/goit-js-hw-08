@@ -98,8 +98,6 @@ function createGallery(images) {
 
 createGallery(images);
 
-let instance;
-
 galleryList.addEventListener("click", selectImage);
 
 function selectImage(event) {
@@ -111,7 +109,7 @@ function selectImage(event) {
   const originalImageSrc = clickedImage.parentElement.href;
 
   const modalContent = `<img src="${originalImageSrc}" alt="${clickedImage.alt}">`;
-  instance = basicLightbox.create(modalContent);
+  const instance = basicLightbox.create(modalContent);
 
   instance.show();
 
