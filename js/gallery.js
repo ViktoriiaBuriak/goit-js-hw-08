@@ -108,16 +108,21 @@ function selectImage(event) {
   const originalImageSrc = clickedImage.parentElement.href;
 
   const modalContent = `<img src="${originalImageSrc}" alt="${clickedImage.alt}">`;
-  const instance = basicLightbox.create(modalContent);
+
+  const instance = basicLightbox.create(modalContent, {
+    onShow: () => {
+      window.addEventListener("keydown", closeModalOnEscape);
+    },
+    onClose: () => {
+      window.removeEventListener("keydown", closeModalOnEscape);
+    },
+  });
 
   instance.show();
-
-  window.addEventListener("keydown", closeModalOnEscape);
 
   function closeModalOnEscape(event) {
     if (event.key === "Escape" && instance) {
       instance.close();
-      window.removeEventListener("keydown", closeModalOnEscape);
     }
   }
 }
